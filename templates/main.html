@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Main</title>
+  </head>
+
+  <body>
+  <div>
+  <pre>
+films  req time: {{ req_times[0].strftime('%d %b %Y %H:%M:%S.%f %z') }}
+people req time: {{ req_times[1].strftime('%d %b %Y %H:%M:%S.%f %z') }}
+  </pre>
+
+      {% for film in films %}
+        <p>
+            {{ film.title }} -
+            {{ film.release_date }}
+            <br />
+            {% for person in film.people %}
+                &nbsp;&nbsp;&nbsp; {{ person.name }}
+            {% endfor %}
+        </p>
+      <hr/>
+      {% endfor %}
+  </div>
+  <script src="js/scripts.js"></script>
+  </body>
+</html>
