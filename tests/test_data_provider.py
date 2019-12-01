@@ -61,8 +61,8 @@ class TestDataProvider(TestCase):
             rsps.add("GET", urljoin(DataProvider.URL, DataProvider.FILMS_KEY), status=500)
             rsps.add("GET", urljoin(DataProvider.URL, DataProvider.PEOPLE_KEY), status=500)
             obj = DataProvider()
-            with self.assertRaises(requests.exceptions.RequestException) as cm:
-                films, timestamp = obj.films
+            with self.assertRaises(requests.exceptions.RequestException):
+                _, _ = obj.films
 
             app = create_app()
             app.testing = False
