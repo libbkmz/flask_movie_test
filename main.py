@@ -1,5 +1,6 @@
 import requests
-from flask import Flask, render_template, current_app, Blueprint
+from flask import Flask, render_template, Blueprint
+
 from api import DataProvider
 
 data_provider = DataProvider()

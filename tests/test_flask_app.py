@@ -1,8 +1,8 @@
 from unittest import TestCase
-from main import create_app, data_provider
-from flask.testing import FlaskClient
-import flask
+
 from flask import Response
+
+from main import create_app, data_provider
 
 
 class TestFlaskApp(TestCase):

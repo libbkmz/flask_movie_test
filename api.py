@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from urllib.parse import urljoin
+
 import requests as req
 
 

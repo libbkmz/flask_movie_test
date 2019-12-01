@@ -1,14 +1,13 @@
-import datetime
+import json
 import os
-import sys
-from unittest import TestCase
 from datetime import timedelta
 from time import sleep
-import json
+from unittest import TestCase
 from urllib.parse import urljoin
 
 import requests
 import responses
+
 from api import DataProvider
 from main import create_app, data_provider
 
