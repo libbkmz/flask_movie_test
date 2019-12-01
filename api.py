@@ -13,6 +13,9 @@ class DataProvider:
     def __init__(self):
         self.req_cache = {}
 
+    def clear(self):
+        self.req_cache = {}
+
     # simple implementation of requests with cache
     def _request(self, key):
         # @TODO: key more reliable in case of hash collisions
