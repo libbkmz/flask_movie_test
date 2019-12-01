@@ -7,8 +7,10 @@ class DataProvider:
     URL = "https://ghibliapi.herokuapp.com/"
     CACHE_EXPIRY = timedelta(seconds=60)
 
+    FILMS_KEY = "films"
+    PEOPLE_KEY = "people"
+
     def __init__(self):
-        self.req_session = req.Session()
         self.req_cache = {}
 
     # simple implementation of requests with cache
@@ -23,7 +25,7 @@ class DataProvider:
         url = urljoin(self.URL, key)
         # @TODO: for better performance we can load the data in background
         #  while return the user cached version
-        resp = self.req_session.get(url)
+        resp = req.get(url)
         resp.cache_date = datetime.now()
         resp.from_cache = False
 
@@ -33,8 +35,11 @@ class DataProvider:
     @property
     def films(self):
         films_res = self._request("films")
-        films = films_res.json()
         people_res = self._request("people")
+        if not films_res.ok or not people_res.ok:
+            raise req.exceptions.RequestException
+
+        films = films_res.json()
         people = people_res.json()
 
         films = {x["id"]: x for x in films}
@@ -46,7 +51,7 @@ class DataProvider:
                 film_id = film.rsplit("/", 1)[-1]
                 films[film_id]["people"].append(person)
 
-        return films.values(), (
-            getattr(films_res, "cache_date", 0),
-            getattr(people_res, "cache_date", 0)
+        return list(films.values()), (
+            films_res.cache_date,
+            people_res.cache_date,
         )
