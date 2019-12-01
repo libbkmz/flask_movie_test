@@ -11,25 +11,17 @@
 films  req time: {{ req_times[0].strftime('%d %b %Y %H:%M:%S.%f %z') }}
 people req time: {{ req_times[1].strftime('%d %b %Y %H:%M:%S.%f %z') }}
   </pre>
-
-    {% if films is none %}
-        <h2>No data from External API</h2>
-    {% else %}
-        {% for film in films %}
-            <p>
-                {{ film.title }} -
-                {{ film.release_date }}
-                <br />
-                {% for person in film.people %}
-                    &nbsp;&nbsp;&nbsp; {{ person.name }}
-                {% endfor %}
-            </p>
-            <hr/>
-        {% endfor %}
-    {% endif %}
-
-
+    {% for film in films %}
+        <p>
+            {{ film.title }} -
+            {{ film.release_date }}
+            <br />
+            {% for person in film.people %}
+                &nbsp;&nbsp;&nbsp; {{ person.name }}
+            {% endfor %}
+        </p>
+        <hr/>
+    {% endfor %}
 </div>
-
 </body>
 </html>
